@@ -6,7 +6,6 @@
 
 #define LOG_FILE "cpu_result.log"
 
-// Função para registrar logs
 void write_log(const char *message) {
     FILE *log = fopen(LOG_FILE, "a");
     if (log == NULL) {
@@ -22,7 +21,6 @@ void write_log(const char *message) {
     fclose(log);
 }
 
-// PI pelo método BBP (Bailey–Borwein–Plouffe)
 double calculate_pi_bbp(long iterations) {
     double pi = 0.0;
     for (long k = 0; k < iterations; k++) {
@@ -36,7 +34,6 @@ double calculate_pi_bbp(long iterations) {
     return pi;
 }
 
-// Fatorial gigante com iterador e double (para aguentar valores grandes)
 double factorial_iterative(int n) {
     double result = 1.0;
     for (int i = 2; i <= n; i++) {
@@ -45,7 +42,6 @@ double factorial_iterative(int n) {
     return result;
 }
 
-// Exponenciais pesados com log/exp
 double heavy_exponential(long iterations) {
     double result = 0.0;
     for (long i = 1; i <= iterations; i++) {
@@ -54,7 +50,6 @@ double heavy_exponential(long iterations) {
     return result;
 }
 
-// Multiplicação de matrizes grandes
 void heavy_matrix_multiplication(int size) {
     double **A = malloc(size * sizeof(double *));
     double **B = malloc(size * sizeof(double *));
@@ -71,7 +66,6 @@ void heavy_matrix_multiplication(int size) {
         }
     }
 
-    // Multiplicação
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
             for (int k = 0; k < size; k++) {
@@ -80,7 +74,6 @@ void heavy_matrix_multiplication(int size) {
         }
     }
 
-    // Liberando memória
     for (int i = 0; i < size; i++) {
         free(A[i]);
         free(B[i]);
@@ -91,7 +84,6 @@ void heavy_matrix_multiplication(int size) {
     free(C);
 }
 
-// Cálculo de números primos em um range grande
 long count_primes(long limit) {
     long count = 0;
     for (long num = 2; num <= limit; num++) {
@@ -113,43 +105,38 @@ int main() {
 
     write_log("==== INICIANDO TESTE PESADO DE CPU ====");
 
-    // Teste 1: Calcular PI (BBP)
     write_log("Calculando PI (BBP)...");
     start = clock();
-    double pi = calculate_pi_bbp(10000000);  // 10 milhões de iterações
+    double pi = calculate_pi_bbp(10000000);
     end = clock();
     cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
     printf("PI calculado (BBP): %.15f em %.2f segundos.\n", pi, cpu_time_used);
     write_log(cpu_time_used < 10.0 ? "Desempenho PI BBP: BOM" : "Desempenho PI BBP: RUIM");
 
-    // Teste 2: Fatorial
     write_log("Calculando Fatorial Iterativo...");
     start = clock();
-    double fact = factorial_iterative(170);  // 170! (limite do double antes de dar inf)
+    double fact = factorial_iterative(170);
     end = clock();
     cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
     printf("Fatorial calculado (170!): %.0f em %.2f segundos.\n", fact, cpu_time_used);
     write_log(cpu_time_used < 5.0 ? "Desempenho Fatorial: BOM" : "Desempenho Fatorial: RUIM");
 
-    // Teste 3: Exponenciais pesados
     write_log("Calculando Exponenciais...");
     start = clock();
-    double expo = heavy_exponential(10000000);  // 10 milhões de iterações
+    double expo = heavy_exponential(10000000);
     end = clock();
     cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
     printf("Exponenciais calculado: %.2f em %.2f segundos.\n", expo, cpu_time_used);
     write_log(cpu_time_used < 10.0 ? "Desempenho Exponenciais: BOM" : "Desempenho Exponenciais: RUIM");
 
-    // Teste 4: Multiplicação de matrizes 500x500 (pode aumentar)
     write_log("Multiplicando Matrizes 500x500...");
     start = clock();
-    heavy_matrix_multiplication(500); // 500x500 matrizes
+    heavy_matrix_multiplication(500);
     end = clock();
     cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
     printf("Multiplicação de Matrizes concluída em %.2f segundos.\n", cpu_time_used);
     write_log(cpu_time_used < 20.0 ? "Desempenho Matrizes: BOM" : "Desempenho Matrizes: RUIM");
 
-    // Teste 5: Contar primos até 10 milhões
     write_log("Contando Primos até 10 milhões...");
     start = clock();
     long primes = count_primes(10000000);
