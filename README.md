@@ -32,7 +32,7 @@ gcc -o cpu_extinction cpu_extinction.c -lm
 
 ## Como executar
 
-```bash
+```
 ./cpu_extinction
 ```
 ## Executando
