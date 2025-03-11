@@ -24,10 +24,9 @@ Além disso, o programa gera logs com informações detalhadas das operações, 
 
 Se quiser, dá pra acrescentar uma seção de **Requisitos**, **Compilação**, ou **Como Usar** no README. Exemplo:
 
-```markdown
 ## Como compilar
 
-```bash
+```
 gcc -o cpu_extinction cpu_extinction.c -lm
 ```
 
