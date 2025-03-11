@@ -21,9 +21,6 @@ Após a execução de cada tarefa, o tempo de processamento é registrado e aval
 Além disso, o programa gera logs com informações detalhadas das operações, facilitando o acompanhamento e análise posterior.
 
 ---
-
-Se quiser, dá pra acrescentar uma seção de **Requisitos**, **Compilação**, ou **Como Usar** no README. Exemplo:
-
 ## Como compilar
 
 ```
